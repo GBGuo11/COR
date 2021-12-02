@@ -6,11 +6,11 @@
 #' @param X is the observation matrix
 #' @param y is the response vector
 #' 
-#' @return lWMN
+#' @return  seqL, seqN,lWMN
 #' @export
 
 #' @examples 
-#'  p=6;n=1000;K=5;nk=100;alpha=0.05;sigma=1
+#'  p=6;n=1000;K=2;nk=200;alpha=0.05;sigma=1
 #'  e=rnorm(n,0,sigma); beta=c(sort(c(runif(p,0,1)))); 
 #'  data=c(rnorm(n*p,5,10));X=matrix(data, ncol=p);
 #'  y=X%*%beta+e;
@@ -36,6 +36,7 @@ COR=function(K=K,nk=nk,alpha=alpha,X=X,y=y){
     E[i]=t(y1)%*%(I-X1%*%solve(crossprod(X1)) %*%t(X1))%*% y1/(length(y1)-p)
     betam[,i]=solve(t(X1)%*%X1)%*%t(X1)%*%y1
   }
+  seqL=which.min(L);seqN=which.min(N)
   int=intersect(intersect(Io[which.min(W),],Io[which.min(M),]),Io[which.min(N),])
   Xc=X[int,];yc= y[int]; I=diag(rep(1,length(int))) 
   t(yc)%*%(I-Xc%*%solve(crossprod(Xc))%*%t(Xc))%*% yc/(n-p)
@@ -46,5 +47,5 @@ COR=function(K=K,nk=nk,alpha=alpha,X=X,y=y){
   lW=length(Io[which.min(W),])
   lWM=length(intersect(Io[which.min(W),],Io[which.max(M),]))
   lWMN=length(intersect(intersect(Io[which.min(W),],Io[which.max(M),]),Io[which.min(N),]))
-  return(list(lWMN=lWMN))
+  return(list(seqL=seqL,seqN=seqN,lWMN=lWMN))
 }

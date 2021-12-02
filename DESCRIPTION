@@ -5,6 +5,7 @@ Authors@R:
    c(person("Guangbao", "Guo",role = c("aut", "cre"),
              email = "ggb11111111@163.com",
              comment =  c(ORCID = "0000-0002-4115-6218")),
+     person("Haoyue", "Song", role="aut"),
      person("Lixing", "Zhu", role="aut"))
 Description: Algorithms to select the optimal subsets in distributed estimation.
 License: MIT + file LICENSE
